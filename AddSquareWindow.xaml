@@ -1,0 +1,41 @@
+﻿<Window x:Class="WPFLABA2.AddSquareWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFLABA2"
+        mc:Ignorable="d"
+        Title="Добавить квадрат" Height="300" Width="240"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid Margin="10">
+        <DockPanel LastChildFill="True">
+            <GroupBox  DockPanel.Dock="Top" Header="Задайте точку" Padding="5">
+                <StackPanel>
+                    <TextBlock>Координата X</TextBlock>
+                    <TextBox Name="xCoord"></TextBox>
+                    <TextBlock>Координата Y</TextBlock>
+                    <TextBox Name="yCoord"></TextBox>
+                </StackPanel>
+            </GroupBox>
+            <StackPanel DockPanel.Dock="Bottom" Width="200" Margin="0 5 0 0">
+                <TextBlock >Сторона</TextBlock>
+                <TextBox Name="edge"></TextBox>
+
+                <Button x:Name="btnOk" Width="140" Height="30" Style="{DynamicResource  MaterialDesignRaisedLightButton}"
+                        Content="Создать фигуру"  Margin="5" IsDefault="True" Click="AcceptClick"/>
+                <Button x:Name="btnCansel" Width="140" Height="30" Style="{DynamicResource  MaterialDesignRaisedLightButton}"
+                        Content="Отмена"  Margin="5" IsCancel="True" />
+            </StackPanel>
+
+
+        </DockPanel>
+
+
+    </Grid>
+</Window>
