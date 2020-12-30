@@ -83,7 +83,7 @@ namespace WPFLABA2
         {
             public override Shape Create(Type objectType)
             {
-                Type t = objectType.GetType();
+                //Type t = objectType.GetType();
                 if (CanConvert(typeof(Circle)))
                 {
                     return new Circle();
