@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 
 namespace WPFLABA2
 {
@@ -36,18 +37,12 @@ namespace WPFLABA2
             try
             {
                 string readJson = File.ReadAllText(dataCatalog);
-                shapes = new ObservableCollection<Shape>();
-                var readShapes = (JsonConvert.DeserializeObject<List<Shape>>(readJson, new ShapeConverter()));
-                foreach(var shape in readShapes)
-                {
-                    shapes.Add(shape);
-                }
-                
-                    
-        }
+                shapes = (JsonConvert.DeserializeObject<ObservableCollection<Shape>>(readJson, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All }));            
+            }
             catch(Exception ex)
             {
                 logger.Error(ex.Message);
+                MessageBox.Show($" {ex.Message}");
                 throw ex;
             }
             logger.Info("File read");
@@ -64,7 +59,7 @@ namespace WPFLABA2
 
             try
             {
-                string json = JsonConvert.SerializeObject(shapes);
+                string json = JsonConvert.SerializeObject(shapes, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All } );
                 using (StreamWriter streamWriter = new System.IO.StreamWriter(dataCatalog))
                 {
                     streamWriter.WriteLine(json);
@@ -76,37 +71,6 @@ namespace WPFLABA2
                 logger.Error(ex.Message);
                 throw ex;
             }
-        }
-
-
-        private class ShapeConverter : CustomCreationConverter<Shape>
-        {
-            public override Shape Create(Type objectType)
-            {
-                //Type t = objectType.GetType();
-                if (CanConvert(typeof(Circle)))
-                {
-                    return new Circle();
-                }
-                else if(CanConvert(typeof(Triangle)))
-                {
-                    return new Triangle();
-                }
-                else if (CanConvert(typeof(Square)))
-                {
-                    return new Square();
-                }
-                else if (CanConvert(typeof(Rectangle)))
-                {
-                    return new Rectangle();
-                }
-                else
-                {
-                    throw new ArgumentException("Not all new shapes have been added to this method");
-                }
-            }
-
-
         }
 
     }
